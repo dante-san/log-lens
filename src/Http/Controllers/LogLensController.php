@@ -60,6 +60,7 @@ class LogLensController extends Controller
             'stats'       => $stats,
             'totalPages'  => $result['total_pages'],
             'currentPage' => $page,
+            'totalEntries' => $result['total'],
         ]);
     }
 
@@ -152,10 +153,10 @@ class LogLensController extends Controller
 
         $entries    = array_reverse($entries);
         $total      = count($entries);
-        $totalPages = max(1, ceil($total / $this->maxEntries));
-        $entries    = array_slice($entries, ($page - 1) * $this->maxEntries, $this->maxEntries);
+        // $totalPages = max(1, ceil($total / $this->maxEntries));
+        // $entries    = array_slice($entries, ($page - 1) * $this->maxEntries, $this->maxEntries);
 
-        return ['entries' => $entries, 'total_pages' => $totalPages];
+        return ['entries' => $entries, 'total' => $total, 'total_pages' => 1];
     }
 
     private function calculateStats(string $filePath): array

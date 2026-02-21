@@ -31,7 +31,7 @@
                 </div>
                 <div class="stat-card" onclick="toggleFilter('all')" data-filter="all">
                     <div class="stat-label">Total Entries</div>
-                    <div class="stat-value" id="totalCount">{{ count($logEntries) }}</div>
+                    <div class="stat-value" id="totalCount">{{ $totalEntries }}</div>
                 </div>
                 <div class="stat-card error" onclick="toggleFilter('error')" data-filter="error">
                     <div class="stat-label">Errors</div>
