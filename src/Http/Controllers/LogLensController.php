@@ -60,7 +60,7 @@ class LogLensController extends Controller
             'stats'       => $stats,
             'totalPages'  => $result['total_pages'],
             'currentPage' => $page,
-            'totalEntries' => $result['total'],
+            'totalEntries' => $result['total'] ?? 0,
         ]);
     }
 
@@ -117,7 +117,7 @@ class LogLensController extends Controller
     private function parseLogFileLazy(string $filePath, int $page = 1): array
     {
         if (!File::exists($filePath) || File::size($filePath) === 0) {
-            return ['entries' => [], 'total_pages' => 1];
+            return ['entries' => [], 'total' => 0, 'total_pages' => 1];
         }
 
         $pattern = '/^\[(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})\](?:\s+\w+\.)?(\w+):\s+(.+)$/';
