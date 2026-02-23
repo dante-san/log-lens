@@ -17,7 +17,6 @@ A beautiful, scalable Laravel log viewer. View, search, filter, download, and cl
 - Download or clear individual log files
 - Upload external log files for inspection
 - Handles large log files (100MB+) via lazy streaming
-- Paginated entries — no DOM overload
 - Auto-scroll toggle
 - Clean dark UI with no dependencies on your app's frontend
 
