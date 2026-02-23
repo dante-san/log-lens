@@ -1,31 +1,16 @@
 # Log Lens
 
-A beautiful, scalable Laravel log viewer. View, search, filter, download, and clear your Laravel log files from a clean dark UI — directly in the browser.
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/laxmidhar/log-lens)](https://packagist.org/packages/laxmidhar/log-lens)
+[![Total Downloads](https://img.shields.io/packagist/dt/laxmidhar/log-lens)](https://packagist.org/packages/laxmidhar/log-lens)
+[![PHP](https://img.shields.io/badge/PHP-8.1+-blue)](https://php.net)
+[![Laravel](https://img.shields.io/badge/Laravel-10|11|12-red)](https://laravel.com)
+[![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/dante-san)
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![Laravel](https://img.shields.io/badge/Laravel-10%20|%2011%20|%2012-red)
-![PHP](https://img.shields.io/badge/PHP-8.1+-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-
----
-
-## Features
-
-- View all log files from `storage/logs`
-- Filter by level — Error, Warning, Info, Debug
-- Search across log entries with highlight
-- Download or clear individual log files
-- Upload external log files for inspection
-- Handles large log files (100MB+) via lazy streaming
-- Auto-scroll toggle
-- Clean dark UI with no dependencies on your app's frontend
+Log Lens is a browser-based Laravel log viewer. It reads directly from `storage/logs`, streams files of any size without memory issues, and ships with a fully standalone dark UI that won't interfere with your application's frontend.
 
 ---
 
-## Requirements
-
-- PHP 8.1+
-- Laravel 10, 11, or 12
+![Log Lens](https://raw.githubusercontent.com/dante-san/log-lens/master/screenshot.png)
 
 ---
 
@@ -33,42 +18,27 @@ A beautiful, scalable Laravel log viewer. View, search, filter, download, and cl
 
 ```bash
 composer require laxmidhar/log-lens
-```
-
-Publish assets:
-```bash
 php artisan vendor:publish --tag=loglens-assets
 ```
 
-Publish config (optional):
-```bash
-php artisan vendor:publish --tag=loglens-config
-```
-
----
-
-## Usage
-
-Visit `/logs` in your browser. That's it.
+Visit `/logs`.
 
 ---
 
 ## Configuration
 
-After publishing the config, edit `config/loglens.php`:
+Publish the config:
+
+```bash
+php artisan vendor:publish --tag=loglens-config
+```
 
 ```php
+// config/loglens.php
 return [
-    // URL prefix — change to whatever you want e.g. 'admin/logs'
-    'route_prefix' => 'logs',
-
-    // Middleware applied to all routes
+    'route_prefix' => 'logs',     // e.g. 'admin/logs'
     'middleware'   => ['web'],
-
-    // Max log entries per page
     'max_entries'  => 500,
-
-    // File read chunk size in bytes
     'chunk_size'   => 8192,
 ];
 ```
@@ -77,22 +47,19 @@ return [
 
 ## Customizing Views
 
-To customize the UI, publish the views:
-
 ```bash
 php artisan vendor:publish --tag=loglens-views
 ```
 
-Views will be copied to `resources/views/vendor/loglens/`.
+Published to `resources/views/vendor/loglens/`.
 
 ---
 
 ## Security
 
-It is strongly recommended to protect the log routes with authentication middleware in production:
+Log files can expose sensitive application data. In production, always restrict access:
 
 ```php
-// config/loglens.php
 'middleware' => ['web', 'auth'],
 ```
 
